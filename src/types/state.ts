@@ -2,6 +2,7 @@ import { Player, Team, MainContentEnum } from "./common";
 
 export interface AppState {
   content: MainContentEnum;
-  teams: Team[];
+  playerCount: number;
   players: Player[];
+  teams: Team[];
 }

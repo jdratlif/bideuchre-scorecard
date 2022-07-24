@@ -3,8 +3,9 @@ import { AppState } from "../types/state";
 
 const initialState: AppState = {
   content: MainContentEnum.ScoreCard,
-  teams: ["Us", "Them"],
+  playerCount: 6,
   players: ["Thelma", "Keith", "Geri", "Jon", "David", "Jackie"],
+  teams: ["Us", "Them"],
 };
 
 export default initialState;
