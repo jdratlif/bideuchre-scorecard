@@ -1,7 +1,7 @@
 export enum MainContentEnum {
-  BidChange,
-  DealerChange,
-  Players,
+  BidChangeForm,
+  DealerChangeForm,
+  PlayerForm,
   ScoreCard,
 }
 

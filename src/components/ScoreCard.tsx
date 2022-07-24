@@ -14,7 +14,7 @@ const ScoreCard = () => {
   const { state, dispatch } = useContext(AppContext);
 
   const onClickTeamName = () => {
-    dispatch(Message(ActionEnum.SetContentPlayers));
+    dispatch(Message(ActionEnum.SetContentPlayerForm));
   };
 
   return (

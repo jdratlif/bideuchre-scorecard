@@ -22,10 +22,10 @@ export const Message = createMessage<Messages>();
 
 export const reducer = (state: AppState, action: AppActions): AppState => {
   switch (action.type) {
-    case ActionEnum.SetContentPlayers:
+    case ActionEnum.SetContentPlayerForm:
       return {
         ...state,
-        content: MainContentEnum.Players,
+        content: MainContentEnum.PlayerForm,
       };
 
     case ActionEnum.SetPlayerNames:
