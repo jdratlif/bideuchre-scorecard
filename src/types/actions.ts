@@ -1,3 +1,5 @@
+import { MainContentEnum } from "./common";
+
 /*
   Thanks to Shane Osbourne
   https://medium.com/hackernoon/finally-the-typescript-redux-hooks-events-blog-you-were-looking-for-c4663d823b01
@@ -14,15 +16,17 @@ export type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum ActionEnum {
-  SetContentPlayerForm = "SetContentPlayers",
-  SetTeamNames = "SetTeamNames",
+  SetMainContent = "SetMainContent",
+  SetPlayerCount = "SetPlayerCount",
   SetPlayerNames = "SetPlayerNames",
+  SetTeamNames = "SetTeamNames",
 }
 
 export type Messages = {
-  [ActionEnum.SetContentPlayerForm]: undefined;
-  [ActionEnum.SetPlayerNames]: { names: string[] };
-  [ActionEnum.SetTeamNames]: { names: string[] };
+  [ActionEnum.SetMainContent]: { content: MainContentEnum };
+  [ActionEnum.SetPlayerCount]: { count: number };
+  [ActionEnum.SetPlayerNames]: { players: string[] };
+  [ActionEnum.SetTeamNames]: { teams: string[] };
 };
 
 export type AppActions = ActionMap<Messages>[keyof ActionMap<Messages>];

@@ -5,16 +5,18 @@ import ScoreCardHeader from "./ScoreCardHeader";
 import ScoreIcon from "./ScoreIcon";
 
 import { AppContext } from "../store/store";
-import { Message } from "../store/reducers";
 
 import { ActionEnum } from "../types/actions";
-import { ScoreIconEnum } from "../types/common";
+import { MainContentEnum, ScoreIconEnum } from "../types/common";
 
 const ScoreCard = () => {
   const { state, dispatch } = useContext(AppContext);
 
   const onClickTeamName = () => {
-    dispatch(Message(ActionEnum.SetContentPlayerForm));
+    dispatch({
+      type: ActionEnum.SetMainContent,
+      payload: { content: MainContentEnum.PlayerForm },
+    });
   };
 
   return (
@@ -26,7 +28,9 @@ const ScoreCard = () => {
               <ScoreCardHeader onClickHandler={onClickTeamName}>
                 {state.teams[0]}
               </ScoreCardHeader>
-              <ScoreCardHeader>{state.teams[1]}</ScoreCardHeader>
+              <ScoreCardHeader onClickHandler={onClickTeamName}>
+                {state.teams[1]}
+              </ScoreCardHeader>
               <ScoreCardHeader>Bid</ScoreCardHeader>
               <ScoreCardHeader>Dealer</ScoreCardHeader>
             </tr>
@@ -101,7 +105,7 @@ const ScoreCard = () => {
       </div>
 
       <div className="mt-4 text-center">
-        <p>Winner: Team B</p>
+        <p>Winner: {state.teams[1]}</p>
       </div>
 
       <div className="text-center">
