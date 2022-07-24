@@ -1,16 +1,22 @@
+import { useContext } from "react";
+
 import ScoreCardHeader from "./ScoreCardHeader";
 import ScoreCardEntry from "./ScoreCardEntry";
 import ScoreIcon from "./ScoreIcon";
-import { ScoreIconEnum } from "./ScoreIcon";
+
+import { AppContext } from "../store/store";
+import { ScoreIconEnum } from "../types/common";
 
 const ScoreCard = () => {
+  const { state, dispatch } = useContext(AppContext);
+
   return (
     <div className="mx-4 mt-4 mb-2">
       <table className="min-w-full table-fixed border-2 border-black">
         <thead>
           <tr>
-            <ScoreCardHeader>Team A</ScoreCardHeader>
-            <ScoreCardHeader>Team B</ScoreCardHeader>
+            <ScoreCardHeader>{state.teams[0]}</ScoreCardHeader>
+            <ScoreCardHeader>{state.teams[1]}</ScoreCardHeader>
             <ScoreCardHeader>Bid</ScoreCardHeader>
             <ScoreCardHeader>Dealer</ScoreCardHeader>
           </tr>
@@ -23,7 +29,7 @@ const ScoreCard = () => {
               Team A<br />5<ScoreIcon icon={ScoreIconEnum.spades} />
               <ScoreIcon icon={ScoreIconEnum.smile} />
             </ScoreCardEntry>
-            <ScoreCardEntry>Jackie</ScoreCardEntry>
+            <ScoreCardEntry>{state.players[0]}</ScoreCardEntry>
           </tr>
           <tr className="bg-slate-300">
             <ScoreCardEntry>5</ScoreCardEntry>
@@ -32,7 +38,7 @@ const ScoreCard = () => {
               Team B<br />4<ScoreIcon icon={ScoreIconEnum.clubs} />
               <ScoreIcon icon={ScoreIconEnum.smile} />
             </ScoreCardEntry>
-            <ScoreCardEntry>Thelma</ScoreCardEntry>
+            <ScoreCardEntry>{state.players[1]}</ScoreCardEntry>
           </tr>
           <tr className="bg-slate-100">
             <ScoreCardEntry>9</ScoreCardEntry>
@@ -41,7 +47,7 @@ const ScoreCard = () => {
               Team A<br />6<ScoreIcon icon={ScoreIconEnum.hearts} />
               <ScoreIcon icon={ScoreIconEnum.storm} />
             </ScoreCardEntry>
-            <ScoreCardEntry>Keith</ScoreCardEntry>
+            <ScoreCardEntry>{state.players[2]}</ScoreCardEntry>
           </tr>
           <tr className="bg-slate-300">
             <ScoreCardEntry>3</ScoreCardEntry>
@@ -50,7 +56,7 @@ const ScoreCard = () => {
               Team B<br />5<ScoreIcon icon={ScoreIconEnum.diamonds} />
               <ScoreIcon icon={ScoreIconEnum.smile} />
             </ScoreCardEntry>
-            <ScoreCardEntry>Geri</ScoreCardEntry>
+            <ScoreCardEntry>{state.players[3]}</ScoreCardEntry>
           </tr>
           <tr className="bg-slate-100">
             <ScoreCardEntry>6</ScoreCardEntry>
@@ -61,7 +67,7 @@ const ScoreCard = () => {
               <ScoreIcon icon={ScoreIconEnum.high} />
               <ScoreIcon icon={ScoreIconEnum.smile} />
             </ScoreCardEntry>
-            <ScoreCardEntry>Jon</ScoreCardEntry>
+            <ScoreCardEntry>{state.players[4]}</ScoreCardEntry>
           </tr>
           <tr className="bg-slate-300">
             <ScoreCardEntry>22</ScoreCardEntry>
@@ -72,13 +78,13 @@ const ScoreCard = () => {
               <ScoreIcon icon={ScoreIconEnum.low} />
               <ScoreIcon icon={ScoreIconEnum.smile} />
             </ScoreCardEntry>
-            <ScoreCardEntry>David</ScoreCardEntry>
+            <ScoreCardEntry>{state.players[5]}</ScoreCardEntry>
           </tr>
           <tr className="bg-slate-100">
             <ScoreCardEntry>22</ScoreCardEntry>
             <ScoreCardEntry>63</ScoreCardEntry>
             <ScoreCardEntry>None</ScoreCardEntry>
-            <ScoreCardEntry>Jackie</ScoreCardEntry>
+            <ScoreCardEntry>{state.players[0]}</ScoreCardEntry>
           </tr>
         </tbody>
       </table>

@@ -1,15 +1,4 @@
-export enum ScoreIconEnum {
-  clubs = "clubs",
-  diamonds = "diamonds",
-  hearts = "hearts",
-  spades = "spades",
-  high = "high",
-  low = "low",
-  star = "star",
-  moon = "moon",
-  smile = "smile",
-  storm = "storm",
-}
+import { ScoreIconEnum } from "../types/common";
 
 export interface ScoreIconProps {
   icon: ScoreIconEnum;
