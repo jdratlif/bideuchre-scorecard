@@ -1,12 +1,14 @@
 import { createContext, useReducer } from "react";
 
 import initialState from "./initialState";
-import { AppState } from "../types/state";
 import { reducer } from "./reducers";
+
+import { AppActions } from "../types/actions";
+import { AppState } from "../types/state";
 
 export const AppContext = createContext<{
   state: AppState;
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<AppActions>;
 }>({
   state: initialState,
   dispatch: () => null,

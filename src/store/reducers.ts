@@ -1,4 +1,5 @@
 import { ActionEnum, AppActions, Messages } from "../types/actions";
+import { MainContentEnum } from "../types/common";
 import { AppState } from "../types/state";
 
 /*
@@ -19,8 +20,14 @@ const createMessage = <Obj extends { [index: string]: any }>() => {
 
 export const Message = createMessage<Messages>();
 
-export const reducer = (state: AppState, action: AppActions) => {
+export const reducer = (state: AppState, action: AppActions): AppState => {
   switch (action.type) {
+    case ActionEnum.SetContentPlayers:
+      return {
+        ...state,
+        content: MainContentEnum.Players,
+      };
+
     case ActionEnum.SetPlayerNames:
       console.log("set player names...");
       break;
@@ -28,6 +35,9 @@ export const reducer = (state: AppState, action: AppActions) => {
     case ActionEnum.SetTeamNames:
       console.log("set team names...");
       break;
+
+    default:
+      console.error("Unhandled action!");
   }
 
   return state;

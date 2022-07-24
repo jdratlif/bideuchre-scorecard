@@ -14,11 +14,13 @@ export type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum ActionEnum {
+  SetContentPlayers = "SetContentPlayers",
   SetTeamNames = "SetTeamNames",
   SetPlayerNames = "SetPlayerNames",
 }
 
 export type Messages = {
+  [ActionEnum.SetContentPlayers]: undefined;
   [ActionEnum.SetPlayerNames]: { names: string[] };
   [ActionEnum.SetTeamNames]: { names: string[] };
 };

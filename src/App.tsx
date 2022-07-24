@@ -1,17 +1,20 @@
+import { useContext } from "react";
+
 import Container from "./components/Container";
 import ScoreCard from "./components/ScoreCard";
 
-import { AppProvider } from "./store/store";
+import { AppContext } from "./store/store";
+import { MainContentEnum } from "./types/common";
 
 const App = () => {
-  return (
-    <AppProvider>
-      <Container>
-        <h1 className="text-center text-3xl">Bid Euchre Score Card</h1>
+  const { state } = useContext(AppContext);
 
-        <ScoreCard />
-      </Container>
-    </AppProvider>
+  return (
+    <Container>
+      <h1 className="text-center text-3xl">Bid Euchre Score Card</h1>
+
+      {state.content == MainContentEnum.ScoreCard && <ScoreCard />}
+    </Container>
   );
 };
 

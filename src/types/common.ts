@@ -1,3 +1,10 @@
+export enum MainContentEnum {
+  BidChange,
+  DealerChange,
+  Players,
+  ScoreCard,
+}
+
 export type Player = string;
 export type Team = string;
 

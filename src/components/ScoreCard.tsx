@@ -1,14 +1,21 @@
 import { useContext } from "react";
 
-import ScoreCardHeader from "./ScoreCardHeader";
 import ScoreCardEntry from "./ScoreCardEntry";
+import ScoreCardHeader from "./ScoreCardHeader";
 import ScoreIcon from "./ScoreIcon";
 
 import { AppContext } from "../store/store";
+import { Message } from "../store/reducers";
+
+import { ActionEnum } from "../types/actions";
 import { ScoreIconEnum } from "../types/common";
 
 const ScoreCard = () => {
   const { state, dispatch } = useContext(AppContext);
+
+  const onClickTeamName = () => {
+    dispatch(Message(ActionEnum.SetContentPlayers));
+  };
 
   return (
     <>
@@ -16,7 +23,9 @@ const ScoreCard = () => {
         <table className="min-w-full table-fixed border-2 border-black">
           <thead>
             <tr>
-              <ScoreCardHeader>{state.teams[0]}</ScoreCardHeader>
+              <ScoreCardHeader onClickHandler={onClickTeamName}>
+                {state.teams[0]}
+              </ScoreCardHeader>
               <ScoreCardHeader>{state.teams[1]}</ScoreCardHeader>
               <ScoreCardHeader>Bid</ScoreCardHeader>
               <ScoreCardHeader>Dealer</ScoreCardHeader>
