@@ -1,6 +1,6 @@
 import React from "react";
 
-export type ScoreCardHeaderProps = React.PropsWithChildren & {
+type ScoreCardHeaderProps = React.PropsWithChildren & {
   onClickHandler?(event: React.MouseEvent<HTMLElement>): void;
 };
 

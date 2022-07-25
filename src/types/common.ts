@@ -1,3 +1,11 @@
+export interface Bid {
+  team: number;
+  tricks: number;
+  trump: TrumpEnum;
+  partners_best?: boolean;
+  shoot_the_moon?: boolean;
+}
+
 export enum MainContentEnum {
   BidChangeForm,
   DealerChangeForm,
@@ -6,7 +14,12 @@ export enum MainContentEnum {
 }
 
 export type Player = string;
-export type Team = string;
+
+export interface Round {
+  bid?: Bid;
+  dealer?: number;
+  contractTricks?: number;
+}
 
 export enum ScoreIconEnum {
   clubs = "clubs",
@@ -19,4 +32,15 @@ export enum ScoreIconEnum {
   moon = "moon",
   smile = "smile",
   storm = "storm",
+}
+
+export type Team = string;
+
+export enum TrumpEnum {
+  Clubs,
+  Diamonds,
+  Hearts,
+  Spades,
+  High,
+  Low,
 }

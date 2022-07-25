@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Formik, FormikHelpers, Form } from "formik";
 
+import Button from "./Button";
 import PlayerNames from "./PlayerNames";
 import TeamNames from "./TeamNames";
 
@@ -8,7 +9,6 @@ import { AppContext } from "../store/store";
 
 import { ActionEnum } from "../types/actions";
 import { MainContentEnum } from "../types/common";
-import Button from "./Button";
 
 interface PlayerFormValues {
   team_name_1: string;
