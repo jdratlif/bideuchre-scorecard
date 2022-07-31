@@ -1,4 +1,23 @@
-import { Round } from "./types/common";
+import { Round, Team } from "./types/common";
+
+export const getScores = (
+  handNumber: number,
+  rounds: Round[],
+  players: number = 6
+): [number, number] => {
+  let scores: [number, number] = [0, 0];
+
+  if (handNumber > 0) {
+    for (let i = 0; i < handNumber; i++) {
+      const roundScores = scoreRound(rounds[i], players);
+
+      scores[0] += roundScores[0];
+      scores[1] += roundScores[1];
+    }
+  }
+
+  return scores;
+};
 
 export const isContractMade = (round: Round): boolean => {
   if (round.bid && round.contractTricks) {
@@ -38,21 +57,22 @@ export const scoreRound = (round: Round, players: number): [number, number] => {
   return scores;
 };
 
-export const getScores = (
-  handNumber: number,
+export const summarizeGame = (
   rounds: Round[],
+  teams: Team[],
   players: number = 6
-): [number, number] => {
-  let scores: [number, number] = [0, 0];
+) => {
+  const scores = getScores(rounds.length, rounds, players);
 
-  if (handNumber > 0) {
-    for (let i = 0; i < handNumber; i++) {
-      const roundScores = scoreRound(rounds[i], players);
-
-      scores[0] += roundScores[0];
-      scores[1] += roundScores[1];
-    }
+  if (scores[0] >= 54 || scores[1] <= -54) {
+    return `Winner: ${teams[0]}`;
+  } else if (scores[1] >= 54 || scores[0] <= -54) {
+    return `Winner: ${teams[1]}`;
+  } else if (scores[0] > scores[1]) {
+    return `${teams[0]}: Winning by ${scores[0] - scores[1]}`;
+  } else if (scores[1] > scores[0]) {
+    return `${teams[1]}: Winning by ${scores[1] - scores[0]}`;
   }
 
-  return scores;
+  return "The score is tied";
 };

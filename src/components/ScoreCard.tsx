@@ -9,6 +9,8 @@ import { AppContext } from "../store/store";
 import { ActionEnum } from "../types/actions";
 import { MainContentEnum } from "../types/common";
 
+import { summarizeGame } from "../util";
+
 const ScoreCard = () => {
   const { state, dispatch } = useContext(AppContext);
 
@@ -52,7 +54,9 @@ const ScoreCard = () => {
       </div>
 
       <div className="my-4">
-        <p className="text-center text-2xl">Winner: {state.teams[1]}</p>
+        <p className="text-center text-2xl">
+          {summarizeGame(state.rounds, state.teams, state.playerCount)}
+        </p>
       </div>
 
       <div className="text-center">
