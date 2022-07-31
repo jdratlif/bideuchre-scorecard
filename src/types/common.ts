@@ -2,8 +2,8 @@ export interface Bid {
   team: number;
   tricks: number;
   trump: TrumpEnum;
-  partners_best?: boolean;
-  shoot_the_moon?: boolean;
+  partnersBest?: boolean;
+  shootTheMoon?: boolean;
 }
 
 export enum MainContentEnum {

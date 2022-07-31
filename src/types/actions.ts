@@ -1,4 +1,4 @@
-import { MainContentEnum } from "./common";
+import { Bid, MainContentEnum } from "./common";
 
 /*
   Thanks to Shane Osbourne
@@ -16,21 +16,29 @@ export type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum ActionEnum {
+  ChangeBid = "ChangeBid",
   ChangeDealer = "ChangeDealer",
   NewGame = "NewGame",
   SetMainContent = "SetMainContent",
   SetPlayerCount = "SetPlayerCount",
   SetPlayerNames = "SetPlayerNames",
   SetTeamNames = "SetTeamNames",
+  SubmitChangedBid = "SubmitChangedBid",
 }
 
 export type Messages = {
+  [ActionEnum.ChangeBid]: { handNumber: number };
   [ActionEnum.ChangeDealer]: { handNumber: number; dealer: number };
   [ActionEnum.NewGame]: undefined;
   [ActionEnum.SetMainContent]: { content: MainContentEnum };
   [ActionEnum.SetPlayerCount]: { count: number };
   [ActionEnum.SetPlayerNames]: { players: string[] };
   [ActionEnum.SetTeamNames]: { teams: string[] };
+  [ActionEnum.SubmitChangedBid]: {
+    handNumber: number;
+    bid: Bid;
+    contractTricks?: number;
+  };
 };
 
 export type AppActions = ActionMap<Messages>[keyof ActionMap<Messages>];

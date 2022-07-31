@@ -1,5 +1,6 @@
 import { useContext } from "react";
 
+import BidChangeForm from "./components/BidChangeForm";
 import Container from "./components/Container";
 import PlayerForm from "./components/PlayerForm";
 import ScoreCard from "./components/ScoreCard";
@@ -16,6 +17,7 @@ const App = () => {
 
       {state.content == MainContentEnum.ScoreCard && <ScoreCard />}
       {state.content == MainContentEnum.PlayerForm && <PlayerForm />}
+      {state.content == MainContentEnum.BidChangeForm && <BidChangeForm />}
     </Container>
   );
 };

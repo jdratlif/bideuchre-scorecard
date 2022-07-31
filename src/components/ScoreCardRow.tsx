@@ -4,24 +4,17 @@ import ScoreCardEntry from "./ScoreCardEntry";
 import ScoreDisplay from "./ScoreDisplay";
 import ScoreIcon from "./ScoreIcon";
 
+import { TrumpIcon } from "../store/globals";
 import { AppContext } from "../store/store";
+
 import { ActionEnum } from "../types/actions";
-import { ScoreIconEnum, TrumpEnum } from "../types/common";
+import { MainContentEnum, ScoreIconEnum } from "../types/common";
 
 import { getScores, isContractMade, scoreRound } from "../util";
 
 interface ScoreCardRowProps {
   handNumber: number;
 }
-
-const TrumpIcon = {
-  [TrumpEnum.Clubs]: ScoreIconEnum.clubs,
-  [TrumpEnum.Diamonds]: ScoreIconEnum.diamonds,
-  [TrumpEnum.Hearts]: ScoreIconEnum.hearts,
-  [TrumpEnum.Spades]: ScoreIconEnum.spades,
-  [TrumpEnum.High]: ScoreIconEnum.high,
-  [TrumpEnum.Low]: ScoreIconEnum.low,
-};
 
 const ScoreCardRow: React.FC<ScoreCardRowProps> = ({ handNumber }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -40,12 +33,12 @@ const ScoreCardRow: React.FC<ScoreCardRowProps> = ({ handNumber }) => {
     tricks = round.bid.tricks;
     trumpIcon = TrumpIcon[round.bid.trump];
 
-    if (round.bid.partners_best) {
+    if (round.bid.partnersBest) {
       tricks = null;
       tricksIcon = ScoreIconEnum.star;
     }
 
-    if (round.bid.shoot_the_moon) {
+    if (round.bid.shootTheMoon) {
       tricks = null;
       tricksIcon = ScoreIconEnum.moon;
     }
@@ -59,6 +52,22 @@ const ScoreCardRow: React.FC<ScoreCardRowProps> = ({ handNumber }) => {
 
   const currentScores = getScores(handNumber, state.rounds, state.playerCount);
   const roundScore = scoreRound(round, state.playerCount);
+
+  const onClickBidChange = () => {
+    dispatch({
+      type: ActionEnum.ChangeBid,
+      payload: {
+        handNumber,
+      },
+    });
+
+    dispatch({
+      type: ActionEnum.SetMainContent,
+      payload: {
+        content: MainContentEnum.BidChangeForm,
+      },
+    });
+  };
 
   const onClickDealerChange = () => {
     let dealer = state.rounds[handNumber].dealer;
@@ -84,7 +93,7 @@ const ScoreCardRow: React.FC<ScoreCardRowProps> = ({ handNumber }) => {
       <ScoreCardEntry>
         <ScoreDisplay score={currentScores[1]} change={roundScore[1]} />
       </ScoreCardEntry>
-      <ScoreCardEntry>
+      <ScoreCardEntry onClick={onClickBidChange}>
         {round.bid && (
           <>
             {team}

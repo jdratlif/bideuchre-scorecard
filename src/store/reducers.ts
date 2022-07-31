@@ -2,15 +2,21 @@ import { ActionEnum, AppActions } from "../types/actions";
 import { AppState } from "../types/state";
 
 export const reducer = (state: AppState, action: AppActions): AppState => {
-  switch (action.type) {
-    case ActionEnum.ChangeDealer:
-      let newRounds = state.rounds;
+  let rounds = state.rounds;
 
-      newRounds[action.payload.handNumber].dealer = action.payload.dealer;
+  switch (action.type) {
+    case ActionEnum.ChangeBid:
+      return {
+        ...state,
+        bidChangeHand: action.payload.handNumber,
+      };
+
+    case ActionEnum.ChangeDealer:
+      rounds[action.payload.handNumber].dealer = action.payload.dealer;
 
       return {
         ...state,
-        rounds: newRounds,
+        rounds,
       };
 
     case ActionEnum.NewGame:
@@ -45,6 +51,28 @@ export const reducer = (state: AppState, action: AppActions): AppState => {
       return {
         ...state,
         teams: action.payload.teams,
+      };
+
+    case ActionEnum.SubmitChangedBid:
+      const handNumber = action.payload.handNumber;
+      let round = rounds[handNumber];
+
+      round.bid = action.payload.bid;
+      round.contractTricks = action.payload.contractTricks;
+
+      if (action.payload.contractTricks !== undefined) {
+        const currentRound = rounds.length - 1;
+
+        if (handNumber == currentRound) {
+          rounds.push({
+            dealer: (round.dealer! + 1) % state.playerCount,
+          });
+        }
+      }
+
+      return {
+        ...state,
+        rounds,
       };
 
     default:

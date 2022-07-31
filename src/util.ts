@@ -44,9 +44,9 @@ export const scoreRound = (round: Round, players: number): [number, number] => {
       teamPoints = -round.bid.tricks;
     }
 
-    if (round.bid.partners_best) {
+    if (round.bid.partnersBest) {
       teamPoints *= 2;
-    } else if (round.bid.shoot_the_moon) {
+    } else if (round.bid.shootTheMoon) {
       teamPoints *= 4;
     }
 
