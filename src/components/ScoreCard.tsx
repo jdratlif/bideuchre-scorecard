@@ -1,5 +1,6 @@
 import { useContext } from "react";
 
+import Button from "./Button";
 import ScoreCardHeader from "./ScoreCardHeader";
 import ScoreCardRow from "./ScoreCardRow";
 
@@ -16,6 +17,14 @@ const ScoreCard = () => {
       type: ActionEnum.SetMainContent,
       payload: { content: MainContentEnum.PlayerForm },
     });
+  };
+
+  const onClickNewGameButton = () => {
+    if (confirm("Really start new game?")) {
+      dispatch({
+        type: ActionEnum.NewGame,
+      });
+    }
   };
 
   return (
@@ -42,12 +51,18 @@ const ScoreCard = () => {
         </table>
       </div>
 
-      <div className="mt-4 text-center">
-        <p>Winner: {state.teams[1]}</p>
+      <div className="my-4">
+        <p className="text-center text-2xl">Winner: {state.teams[1]}</p>
       </div>
 
       <div className="text-center">
-        <button>New Game</button>
+        <Button
+          label="New Game"
+          onClick={onClickNewGameButton}
+          foreground="text-yellow-400"
+          background="bg-blue-800"
+          highlight="hover:bg-blue-600"
+        />
       </div>
     </>
   );

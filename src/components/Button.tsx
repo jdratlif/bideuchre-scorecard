@@ -1,6 +1,7 @@
 interface ButtonProps {
   label: string;
   type?: "button" | "submit" | "reset";
+  onClick?: () => void;
   foreground?: string;
   background?: string;
   highlight?: string;
@@ -9,6 +10,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   label,
   type,
+  onClick,
   foreground,
   background,
   highlight,
@@ -22,17 +24,17 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   if (!highlight) {
-    highlight = "bg-emerald-400";
+    highlight = "hover:bg-emerald-400";
   }
 
   if (!type) {
     type = "button";
   }
 
-  const classes = `border border-black px-3 py-1 text-center text-lg font-semibold ${foreground} ${background} hover:${highlight}`;
+  const classes = `border border-black px-3 py-1 text-center text-lg font-semibold ${foreground} ${background} ${highlight}`;
 
   return (
-    <button className={classes} type={type}>
+    <button className={classes} type={type} onClick={onClick}>
       {label}
     </button>
   );

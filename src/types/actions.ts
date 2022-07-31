@@ -16,6 +16,7 @@ export type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum ActionEnum {
+  NewGame = "NewGame",
   SetMainContent = "SetMainContent",
   SetPlayerCount = "SetPlayerCount",
   SetPlayerNames = "SetPlayerNames",
@@ -23,6 +24,7 @@ export enum ActionEnum {
 }
 
 export type Messages = {
+  [ActionEnum.NewGame]: undefined;
   [ActionEnum.SetMainContent]: { content: MainContentEnum };
   [ActionEnum.SetPlayerCount]: { count: number };
   [ActionEnum.SetPlayerNames]: { players: string[] };
