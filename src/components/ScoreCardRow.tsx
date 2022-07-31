@@ -5,6 +5,7 @@ import ScoreDisplay from "./ScoreDisplay";
 import ScoreIcon from "./ScoreIcon";
 
 import { AppContext } from "../store/store";
+import { ActionEnum } from "../types/actions";
 import { ScoreIconEnum, TrumpEnum } from "../types/common";
 
 import { getScores, isContractMade, scoreRound } from "../util";
@@ -23,7 +24,7 @@ const TrumpIcon = {
 };
 
 const ScoreCardRow: React.FC<ScoreCardRowProps> = ({ handNumber }) => {
-  const { state } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const round = state.rounds[handNumber];
   const rowColor = handNumber % 2 == 0 ? "bg-slate-100" : "bg-slate-300";
@@ -59,6 +60,22 @@ const ScoreCardRow: React.FC<ScoreCardRowProps> = ({ handNumber }) => {
   const currentScores = getScores(handNumber, state.rounds, state.playerCount);
   const roundScore = scoreRound(round, state.playerCount);
 
+  const onClickDealerChange = () => {
+    let dealer = state.rounds[handNumber].dealer;
+
+    if (dealer !== undefined) {
+      dealer = (dealer + 1) % state.playerCount;
+
+      dispatch({
+        type: ActionEnum.ChangeDealer,
+        payload: {
+          handNumber,
+          dealer,
+        },
+      });
+    }
+  };
+
   return (
     <tr className={rowColor}>
       <ScoreCardEntry>
@@ -79,7 +96,7 @@ const ScoreCardRow: React.FC<ScoreCardRowProps> = ({ handNumber }) => {
           </>
         )}
       </ScoreCardEntry>
-      <ScoreCardEntry>
+      <ScoreCardEntry onClick={onClickDealerChange}>
         {round.dealer !== undefined && state.players[round.dealer]}
       </ScoreCardEntry>
     </tr>

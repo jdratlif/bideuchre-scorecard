@@ -3,6 +3,16 @@ import { AppState } from "../types/state";
 
 export const reducer = (state: AppState, action: AppActions): AppState => {
   switch (action.type) {
+    case ActionEnum.ChangeDealer:
+      let newRounds = state.rounds;
+
+      newRounds[action.payload.handNumber].dealer = action.payload.dealer;
+
+      return {
+        ...state,
+        rounds: newRounds,
+      };
+
     case ActionEnum.NewGame:
       return {
         ...state,
