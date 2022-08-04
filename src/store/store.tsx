@@ -17,7 +17,10 @@ export const AppContext = createContext<{
 export const AppProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState, () => {
+    const data = localStorage.getItem("scorecard");
+    return data ? JSON.parse(data) : initialState;
+  });
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

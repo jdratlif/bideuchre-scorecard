@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import Button from "./Button";
 import ScoreCardHeader from "./ScoreCardHeader";
@@ -13,6 +13,10 @@ import { summarizeGame } from "../util";
 
 const ScoreCard = () => {
   const { state, dispatch } = useContext(AppContext);
+
+  useEffect(() => {
+    localStorage.setItem("scorecard", JSON.stringify(state));
+  }, [state]);
 
   const onClickTeamName = () => {
     dispatch({
